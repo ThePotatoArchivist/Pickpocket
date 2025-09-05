@@ -3,7 +3,7 @@
 	"id": "pickpocket",
 	"version": "${version}",
 	"name": "Pickpocket",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Open other players' inventories",
 	"authors": [
 		"ThePotatoArchivist"
 	],
@@ -23,9 +23,9 @@
 		"pickpocket.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.10",
-		"minecraft": ">=1.20.1",
-		"java": ">=17",
+		"fabricloader": ">=0.17.2",
+		"minecraft": ">=1.21.2",
+		"java": ">=21",
 		"fabric-api": "*"
 	},
 	"suggests": {
