@@ -23,7 +23,7 @@ public class Pickpocket implements ModInitializer {
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!player.isSecondaryUseActive() || !(entity instanceof Player targetPlayer)) return InteractionResult.PASS;
-			if (!world.isClientSide)
+			if (!world.isClientSide())
 				player.openMenu(new PlayerInventoryScreenHandler(targetPlayer));
 			return InteractionResult.SUCCESS;
 		});
