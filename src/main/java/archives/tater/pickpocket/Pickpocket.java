@@ -2,8 +2,8 @@ package archives.tater.pickpocket;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,10 +22,10 @@ public class Pickpocket implements ModInitializer {
 		// Proceed with mild caution.
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-			if (!player.shouldCancelInteraction() || !(entity instanceof PlayerEntity targetPlayer)) return ActionResult.PASS;
-			if (!world.isClient)
-				player.openHandledScreen(new PlayerInventoryScreenHandler(targetPlayer));
-			return ActionResult.SUCCESS;
+			if (!player.isSecondaryUseActive() || !(entity instanceof Player targetPlayer)) return InteractionResult.PASS;
+			if (!world.isClientSide)
+				player.openMenu(new PlayerInventoryScreenHandler(targetPlayer));
+			return InteractionResult.SUCCESS;
 		});
 	}
 }

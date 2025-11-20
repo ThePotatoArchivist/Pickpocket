@@ -1,28 +1,28 @@
 package archives.tater.pickpocket;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerInventoryScreenHandler implements NamedScreenHandlerFactory {
-    private final PlayerEntity targetPlayer;
+public class PlayerInventoryScreenHandler implements MenuProvider {
+    private final Player targetPlayer;
 
-    public PlayerInventoryScreenHandler(PlayerEntity targetPlayer) {
+    public PlayerInventoryScreenHandler(Player targetPlayer) {
         this.targetPlayer = targetPlayer;
     }
 
     @Override
-    public Text getDisplayName() {
+    public Component getDisplayName() {
         return targetPlayer.getName();
     }
 
     @Override
-    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X4, syncId, playerInventory, targetPlayer.getInventory(), 4);
+    public @Nullable AbstractContainerMenu createMenu(int syncId, Inventory playerInventory, Player player) {
+        return new ChestMenu(MenuType.GENERIC_9x4, syncId, playerInventory, targetPlayer.getInventory(), 4);
     }
 }
